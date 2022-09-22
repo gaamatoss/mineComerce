@@ -1,7 +1,10 @@
 @import "rsuite/dist/rsuite.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+	--background-color: #292929;
+	--purple-main: rgb(129, 140, 248);
+	--page-title: rgba(255,255,255,0.5);
+	--transparent-white: rgba(255,255,255,0.05);
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -22,7 +25,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-  background-color: #252525;
+	scroll-behavior: smooth;
+	font-family: inter, sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -47,3 +51,13 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+::-webkit-scrollbar {
+	width: 5px;
+	background-color: #292929;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: var(--purple-main);
+	border-radius: 5px;
+  }
