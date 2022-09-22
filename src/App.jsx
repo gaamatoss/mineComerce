@@ -8,10 +8,14 @@ function App() {
 
   const [openCart, setOpenCart] = useState(false)
 
+  function handleCart() {
+    setOpenCart(!openCart)
+  }
+
   return (
     <div className="App">
-      <Menu onclick={() => setOpenCart(true)} />
-      <Cart openCart={false} />
+      <Menu openCart={handleCart} />
+      <Cart state={openCart} closeCart={handleCart} />
       <Content />
     </div>
   )
