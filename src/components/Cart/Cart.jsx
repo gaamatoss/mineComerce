@@ -1,5 +1,6 @@
 import React from "react";
 import { Drawer, Button, Placeholder } from 'rsuite';
+import CartItem from './CartItem'
 
 export default function Cart({ state, closeCart }) {
 
@@ -16,12 +17,7 @@ export default function Cart({ state, closeCart }) {
                     </Drawer.Actions>
                 </Drawer.Header>
                 <Drawer.Body>
-                    <Placeholder.Paragraph />
-                    <Placeholder.Paragraph />
-                    <Placeholder.Paragraph />
-                    <Placeholder.Paragraph />
-                    <Placeholder.Paragraph />
-                    <Placeholder.Paragraph />
+                    <CartItem />
                 </Drawer.Body>
             </Drawer>
         </div>
