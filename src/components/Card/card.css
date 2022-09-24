@@ -1,0 +1,14 @@
+.btn__add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .7rem;
+    border-radius: 10px;
+    background-color: #393939;
+    color: white;
+    transition: .2s ease-in-out;
+}
+
+.btn__add:hover {
+    opacity: 0.8;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Nav } from 'rsuite';
+import Position from "rsuite/esm/Overlay/Position";
 import './menu.css'
 
 export default function Menu({ openCart }) {
