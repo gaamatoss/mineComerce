@@ -13,7 +13,9 @@ axios({
     url: `http://gateway.marvel.com/v1/public/characters?ts=${timestamp}&apikey=${apikey}&hash=${md5}&limit=100`,
 }).then(function (response) {
     const data = response.data.data.results
-    console.log(data);
+    // data.forEach(element => {
+    //     console.log(element.name);
+    // });
 });
 
 // console.log(Math.floor(Date.now()));
