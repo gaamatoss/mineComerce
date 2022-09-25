@@ -15,7 +15,24 @@ export default function Content() {
     const placement = 'topStart';
     const toaster = useToaster();
 
+    const message = (
+        <Message showIcon type={type}>
+            {type}: {name}Hero added to cart.
+        </Message>
+    );
+    function addCart(name) {
+        toaster.push(message, { placement })
+        console.log(e.target);
+    }
+
     const [heros, setHeros] = useState([])
+    const [itensPerPage, setItensPerPage] = useState(10)
+    const [currentPage, setCurrentPage] = useState(0)
+
+    const pages = Math.ceil(heros.length / itensPerPage)
+    const startIndex = currentPage * itensPerPage
+    const endIndex = startIndex + itensPerPage
+    const currentItens = heros.slice(startIndex, endIndex)
 
     useEffect(() => {
         axios.get(`http://gateway.marvel.com/v1/public/characters?ts=${timestamp}&apikey=${apikey}&hash=${md5}&limit=100`)
@@ -24,27 +41,43 @@ export default function Content() {
             })
             .catch(err => console.log(err));
     }, [])
+    useEffect(() => {
+        setCurrentPage(0)
+    }, [itensPerPage])
 
-
-    const message = (
-        <Message showIcon type={type}>
-            {type}: Item adicionado ao carrinho.
-        </Message>
-    );
-
-    function addCart() {
-        toaster.push(message, { placement })
-    }
 
     return (
         <div className="content">
-            {heros.map(hero => {
-                return (
-                    <div>
-                        <Card addToCard={addCart} name={hero.name} thumb={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
-                    </div>
-                )
-            })}
+            <div>
+                <label htmlFor="">Itens Per Page: </label>
+                <select value={itensPerPage} onChange={(e) => setItensPerPage(Number(e.target.value))}>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                </select>
+                {Array.from(Array(pages), (item, index) => {
+                    return <button
+                        prev
+                        last
+                        next
+                        first
+                        size="lg"
+                        style={{ margin: '5px' }}
+                        value={index}
+                        onClick={(e) => setCurrentPage(Number(e.target.value))}
+                    >{index + 1}</button>
+                })}
+            </div>
+            <div className="heros">
+                {currentItens.map(hero => {
+                    return (
+                        <div key={hero.id}>
+                            <Card addToCard={addCart} name={hero.name} thumb={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
