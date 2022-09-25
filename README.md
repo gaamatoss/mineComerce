@@ -1,1 +1,1 @@
-## Projeto de mini Ecomerce usando react
+## Projeto de mini E-comerce usando react e marvel API
