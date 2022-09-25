@@ -37,7 +37,8 @@ export default function Content() {
     useEffect(() => {
         axios.get(`http://gateway.marvel.com/v1/public/characters?ts=${timestamp}&apikey=${apikey}&hash=${md5}&limit=100`)
             .then((response) => {
-                setHeros(response.data.data.results)
+                const data = response.data.data.results
+                setHeros(data)
             })
             .catch(err => console.log(err));
     }, [])
@@ -45,6 +46,9 @@ export default function Content() {
         setCurrentPage(0)
     }, [itensPerPage])
 
+    const [search, setSearch] = useState('')
+    const filterSearch = search.toLowerCase();
+    const filterHeros = heros.filter((hero) => hero.name.toLowerCase().includes(filterSearch))
 
     return (
         <div className="content">
@@ -58,11 +62,6 @@ export default function Content() {
                 </select>
                 {Array.from(Array(pages), (item, index) => {
                     return <button
-                        prev
-                        last
-                        next
-                        first
-                        size="lg"
                         style={{ margin: '5px' }}
                         value={index}
                         onClick={(e) => setCurrentPage(Number(e.target.value))}
@@ -72,8 +71,8 @@ export default function Content() {
             <div className="heros">
                 {currentItens.map(hero => {
                     return (
-                        <div key={hero.id}>
-                            <Card addToCard={addCart} name={hero.name} thumb={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
+                        <div>
+                            <Card key={hero.id} addToCard={addCart} name={hero.name} thumb={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
                         </div>
                     )
                 })}
